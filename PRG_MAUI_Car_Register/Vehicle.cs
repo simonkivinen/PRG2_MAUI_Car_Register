@@ -1,4 +1,6 @@
-﻿namespace PRG_MAUI_Car_Register
+﻿using System.Text.RegularExpressions;
+
+namespace PRG_MAUI_Car_Register
 {
     class Vehicle
     {
@@ -86,7 +88,9 @@
         public int Year
         {
             get => year;
-            set => year = value;
+            set => year = Regex.IsMatch(value.ToString(),@"^[1-2][0-9][0-9][0-9]$")
+                ? value
+                : throw new ArgumentException("Årsmodell måste anges med fyra siffror, t.ex. 2023");
         }
 
         //TODO Modifiera overriden på ToString() så att allt visas som önskat i UIs listBox
