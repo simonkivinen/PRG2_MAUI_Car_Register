@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System;
 
 namespace PRG_MAUI_Car_Register
 {
@@ -89,8 +90,10 @@ namespace PRG_MAUI_Car_Register
         {
             get => year;
             set => year = Regex.IsMatch(value.ToString(),@"^[1-2][0-9][0-9][0-9]$")
-                ? value
-                : throw new ArgumentException("Årsmodell måste anges med fyra siffror, t.ex. 2023");
+                ? throw new ArgumentException("Årsmodell måste vara ett fyrsiffrigt tal mellan 1000 och 2999")
+                :(value < 1895 || value > DateTime.Now.Year)
+                    ? throw new ArgumentException($"Årsmodell måste vara ett fyrsiffrigt tal mellan 1895 och {DateTime.Now.Year}")
+                    : value;
         }
 
         //TODO Modifiera overriden på ToString() så att allt visas som önskat i UIs listBox
