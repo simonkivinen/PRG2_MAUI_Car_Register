@@ -75,8 +75,10 @@
         //TODO Modell ska valideras, sparas i objektet och visas i UI
         public string Manufacturer
         {
-            get { return manufacturer; }
-            set { this.manufacturer = value; }
+            get => manufacturer;
+            set => manufacturer = !string.IsNullOrWhiteSpace(value)
+                ? value
+                : throw new ArgumentException("Tillverkare måste anges");
         }
 
         //TODO Lägg till möjligheten att spara realistisk årsmodell, validera, spara och visa i objektet och visas i UI. Tips: Regex.IsMatch()
