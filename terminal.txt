@@ -1,0 +1,6 @@
+To run applicationen:
+
+'c:\Users\kivin\Documents\GitHub\PRG2_MAUI_Car_Register\PRG_MAUI_Car_Register\PRG_MAUI_Car_Register.csproj.user' does not support debugging. No launchable target found.
+
+to uppdate applicationen:
+dotnet publish ".\PRG_MAUI_Car_Register\PRG_MAUI_Car_Register.csproj" -f net9.0-windows10.0.19041.0 -c Debug -p:WindowsPackageType=None

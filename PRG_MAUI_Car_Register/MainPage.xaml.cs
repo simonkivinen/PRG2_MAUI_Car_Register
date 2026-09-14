@@ -64,7 +64,7 @@
 
         private void OnSearchClicked(object sender, EventArgs e)
         {
-            string searchTerm = entrySearchRegistrationNumber.Text?.ToLower();
+            string searchTerm = entrySearchRegistrationNumber.Text?.ToLower() ?? string.Empty;
 
             if (string.IsNullOrEmpty(searchTerm))
             {
