@@ -66,8 +66,10 @@
         //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
         public string Model
         {
-            get { return model; }
-            set { this.model = value; }
+            get => model;
+            set => model = !string.IsNullOrWhiteSpace(value)
+                ? value
+                : throw new ArgumentException("Modell måste anges");
         }
 
         //TODO Modell ska valideras, sparas i objektet och visas i UI
