@@ -16,9 +16,15 @@ namespace PRG_MAUI_Car_Register.View
         {
             try
             {
-                Vehicle vehicle = new Vehicle((Vehicle.Type)pickerType.SelectedIndex);
+                Vehicle vehicle = pickerType.SelectedIndex switch
+                {
+                    0 => new Car(),
+                    1 => new Motorcycle(),
+                    2 => new Truck(),
+                    _ => throw new ArgumentException("Välj en fordonstyp.")
+                };
 
-                vehicle.RegistrationNumber = entryRegistrationNumber.Text; ;
+                vehicle.RegistrationNumber = entryRegistrationNumber.Text;
                 vehicle.Manufacturer = entryManufacturer.Text;
                 vehicle.Model = entryModel.Text;
 
@@ -45,15 +51,15 @@ namespace PRG_MAUI_Car_Register.View
 
             if (radioCar.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.Bil).ToList();
+                filteredList = vehicleList.Where(v => v is Car).ToList();
             }
             else if (radioMC.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.MC).ToList();
+                filteredList = vehicleList.Where(v => v is Motorcycle).ToList();
             }
             else if (radioTruck.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.Lastbil).ToList();
+                filteredList = vehicleList.Where(v => v is Truck).ToList();
             }
             else
             {
@@ -82,7 +88,7 @@ namespace PRG_MAUI_Car_Register.View
                                          $"Registreringsnummer: {foundVehicle.RegistrationNumber}\n" +
                                          $"Tillverkare: {foundVehicle.Manufacturer}\n" +
                                          $"Modell: {foundVehicle.Model}\n" +
-                                         $"Typ: {foundVehicle.VehicleType}";
+                                         $"Typ: {foundVehicle.VehicleTypeName}";
             }
             else
             {
