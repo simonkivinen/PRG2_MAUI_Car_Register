@@ -1,8 +1,9 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:PRG_MAUI_Car_Register"
-             x:Class="PRG_MAUI_Car_Register.App">
+             xmlns:view="clr-namespace:PRG_MAUI_Car_Register.View"
+             x:Class="PRG_MAUI_Car_Register.App"
+             xmlns:views="clr-namespace:PRG_MAUI_Car_Register.View">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

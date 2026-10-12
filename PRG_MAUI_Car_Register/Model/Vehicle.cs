@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System;
 
-namespace PRG_MAUI_Car_Register
+namespace PRG_MAUI_Car_Register.Model
 {
     class Vehicle
     {
