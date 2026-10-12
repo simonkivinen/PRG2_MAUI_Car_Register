@@ -1,9 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using System;
-
-namespace PRG_MAUI_Car_Register
+namespace PRG_MAUI_Car_Register.Model
 {
-    class Vehicle
+    public class Vehicle
     {
         // Medlemsvariabler
         public enum Type { Bil, MC, Lastbil };
@@ -26,31 +24,23 @@ namespace PRG_MAUI_Car_Register
 
             set
             {
-                if (!String.IsNullOrWhiteSpace(value))
+                if (!string.IsNullOrWhiteSpace(value) && value.Length == 6)
                 {
-                    if (value.Length == 6)
+                    for (int i = 0; i < 3; i++)
                     {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if (!char.IsLetter(value[i]))
-                                throw new ArgumentException("Inkorrekt registreringsnummer: De första tre tecknen måste vara bokstäver.");
-                        }
-
-                        for (int i = 3; i < 6; i++)
-                        {
-                            if (i < 5)
-                            {
-                                if (!char.IsDigit(value[i]))
-                                    throw new ArgumentException("Inkorrekt registreringsnummer: Det fjärde och femte tecknet måste vara siffror.");
-                            }
-                            else
-                            {
-                                if (!char.IsDigit(value[i]) && !char.IsLetter(value[i]))
-                                    throw new ArgumentException("Inkorrekt registreringsnummer: Det sjätte tecknet måste vara en siffra eller en bokstav.");
-                            }
-                        }
+                        if (!char.IsLetter(value[i]))
+                            throw new ArgumentException("Inkorrekt registreringsnummer: De första tre tecknen måste vara bokstäver.");
                     }
-                }
+
+                    for (int i = 3; i < 5; i++)
+                    {
+                        if (!char.IsDigit(value[i]))
+                            throw new ArgumentException("Inkorrekt registreringsnummer: Det fjärde och femte tecknet måste vara siffror.");
+                    }
+
+                    if (!char.IsDigit(value[5]) && !char.IsLetter(value[5]))
+                        throw new ArgumentException("Inkorrekt registreringsnummer: Det sjätte tecknet måste vara en siffra eller en bokstav.");
+                    }
                 else
                 {
                     throw new ArgumentException("Ett registreringsnummer måste bestå av exakt 6 tecken, med tre bokstäver följt av två siffror och en siffra eller bokstav.");
@@ -89,12 +79,14 @@ namespace PRG_MAUI_Car_Register
         public int Year
         {
             get => year;
-            set => year = Regex.IsMatch(value.ToString(),@"^[1-2][0-9][0-9][0-9]$")
+            set => year = !Regex.IsMatch(value.ToString(), @"^[1-2][0-9][0-9][0-9]$")
                 ? throw new ArgumentException("Årsmodell måste vara ett fyrsiffrigt tal mellan 1000 och 2999")
-                :(value < 1895 || value > DateTime.Now.Year)
+                : (value < 1895 || value > DateTime.Now.Year)
                     ? throw new ArgumentException($"Årsmodell måste vara ett fyrsiffrigt tal mellan 1895 och {DateTime.Now.Year}")
                     : value;
         }
+
+                public string DisplayText => ToString();
 
         //TODO Modifiera overriden på ToString() så att allt visas som önskat i UIs listBox
         public override string ToString() => $"{registrationNumber}\t{vehicleType}\t{manufacturer}\t{model}\t{year}";

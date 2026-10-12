@@ -1,4 +1,6 @@
-﻿namespace PRG_MAUI_Car_Register
+﻿using PRG_MAUI_Car_Register.Model;
+
+namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
@@ -21,8 +23,8 @@
                 vehicle.Model = entryModel.Text;
 
                 vehicleList.Add(vehicle);
-                listViewVehicles.ItemsSource = null;
-                listViewVehicles.ItemsSource = vehicleList;
+                vehicleCollectionView.ItemsSource = null;
+                vehicleCollectionView.ItemsSource = vehicleList;
 
                 ClearTextFields();
             }
@@ -59,16 +61,16 @@
                 filteredList = vehicleList;
             }
 
-            listViewVehicles.ItemsSource = filteredList;
+            vehicleCollectionView.ItemsSource = filteredList;
         }
 
         private void OnSearchClicked(object sender, EventArgs e)
         {
-            string searchTerm = entrySearchRegistrationNumber.Text?.ToLower();
+            string searchTerm = entrySearchRegistrationNumber.Text?.ToLower() ?? string.Empty;
 
             if (string.IsNullOrEmpty(searchTerm))
             {
-                entrySearchRegistrationNumber.Text = "Ange ett registreringsnummer för att söka.";
+                labelSearchResult.Text = "Ange ett registreringsnummer för att söka.";
                 return;
             }
 
