@@ -1,11 +1,11 @@
-﻿using PRG_MAUI_Car_Register.Model;
+﻿using System.Collections.ObjectModel;
+using PRG_MAUI_Car_Register.Model;
 
 namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
-        List<Vehicle> vehicleList = new List<Vehicle>();
-
+        ObservableCollection<Vehicle> vehicleList = new ObservableCollection<Vehicle>();
         public MainPage()
         {
             InitializeComponent();
@@ -46,24 +46,23 @@ namespace PRG_MAUI_Car_Register.View
         {
             if (e.Value != true) return;
 
-            // Skapa en temporär filtrerad lista baserat på vilken radioknapp som är vald
-            List<Vehicle> filteredList;
+            // Where() returnerar IEnumerable, som fungerar för både List och ObservableCollection
+            IEnumerable<Vehicle> filteredList;
 
             if (radioCar.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v is Car).ToList();
+                filteredList = vehicleList.Where(v => v is Car);
             }
             else if (radioMC.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v is Motorcycle).ToList();
+                filteredList = vehicleList.Where(v => v is Motorcycle);
             }
             else if (radioTruck.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v is Truck).ToList();
+                filteredList = vehicleList.Where(v => v is Truck);
             }
             else
             {
-                // Om "Alla" är vald, visa hela listan
                 filteredList = vehicleList;
             }
 
