@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
+#if MAUI_DEVFLOW
+using Microsoft.Maui.DevFlow.Agent;
+#endif
+
 #if ANDROID
 using Android.OS;
 using Android.Views; // Behövs för SetStatusBarColor
@@ -27,6 +31,10 @@ namespace PRG_MAUI_Car_Register
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+#if MAUI_DEVFLOW
+            builder.AddMauiDevFlowAgent();
+#endif
 
 #if DEBUG
             builder.Logging.AddDebug();

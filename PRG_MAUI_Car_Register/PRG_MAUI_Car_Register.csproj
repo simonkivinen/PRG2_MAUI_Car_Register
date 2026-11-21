@@ -16,6 +16,7 @@
 		<RootNamespace>PRG_MAUI_Car_Register</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
+		<EnableMsixTooling>true</EnableMsixTooling>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
