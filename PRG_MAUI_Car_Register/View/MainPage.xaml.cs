@@ -28,6 +28,11 @@ namespace PRG_MAUI_Car_Register.View
                 vehicle.Manufacturer = entryManufacturer.Text;
                 vehicle.Model = entryModel.Text;
 
+                
+                if (!int.TryParse(entryYear.Text, out int year))
+                    throw new ArgumentException("Årsmodell måste vara ett heltal.");
+                vehicle.Year = year;
+
                 vehicleList.Add(vehicle);
                 vehicleCollectionView.ItemsSource = null;
                 vehicleCollectionView.ItemsSource = vehicleList;
@@ -35,7 +40,7 @@ namespace PRG_MAUI_Car_Register.View
                 ClearTextFields();
             }
 
-            // här "fångas" eventuella felmeddelanden från Vehicle
+          
             catch (ArgumentException ex)
             {
                 DisplayAlert("Fel", ex.Message, "OK");
@@ -46,7 +51,7 @@ namespace PRG_MAUI_Car_Register.View
         {
             if (e.Value != true) return;
 
-            // Where() returnerar IEnumerable, som fungerar för både List och ObservableCollection
+          
             IEnumerable<Vehicle> filteredList;
 
             if (radioCar.IsChecked)
@@ -87,6 +92,7 @@ namespace PRG_MAUI_Car_Register.View
                                          $"Registreringsnummer: {foundVehicle.RegistrationNumber}\n" +
                                          $"Tillverkare: {foundVehicle.Manufacturer}\n" +
                                          $"Modell: {foundVehicle.Model}\n" +
+                                         $"Årsmodell: {foundVehicle.Year}\n" +   // NY
                                          $"Typ: {foundVehicle.VehicleTypeName}";
             }
             else
@@ -100,6 +106,7 @@ namespace PRG_MAUI_Car_Register.View
             entryRegistrationNumber.Text = string.Empty;
             entryManufacturer.Text = string.Empty;
             entryModel.Text = string.Empty;
+            entryYear.Text = string.Empty;   
         }
     }
 }
